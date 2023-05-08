@@ -1,15 +1,36 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import {  toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+
 
 const SignUp = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log({ firstName, lastName, email, password });
+  };
+
+  const register =  () => {
+    axios.post(
+      "http://localhost:9000/api/auth/register",
+      {
+        fname: firstName,
+        lname: lastName,
+        email: email,
+        password: password,
+      }
+    ).then(response => {
+      if (response.data.code === 201) {
+        toast.success(response.data.message);
+        setTimeout(()=>navigate('/'),2000)
+      } 
+    }).catch(error => toast.error('Email already exist'))
   };
 
   return (
@@ -72,18 +93,16 @@ const SignUp = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" onClick={register} className="btn btn-primary">
           Sign Up
         </button>
       </form>
       <label htmlFor="a" className="form-label">
-            Already have account ?
-        </label>{' '} {' '}
-        <Link to='/'>
-        <button  className="btn btn-info">
-          Log in
-        </button>
-        </Link>
+        Already have account ?
+      </label>{" "}
+      <Link to="/">
+        <button className="btn btn-info">Log in</button>
+      </Link>
     </div>
   );
 };

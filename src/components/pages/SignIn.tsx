@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import axios from "axios";
+import {  toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log({ email, password });
   };
+
+  const logIn = () => {
+    axios.post(
+      "http://localhost:9000/api/auth/log-in",
+      {
+        email: email,
+        password: password,
+      }
+    ).then(response => {
+      if (response.data.code === 200) {
+        toast.success(response.data.message);
+        setTimeout(()=>navigate('/home'),2000)
+      } 
+    }).catch(error => toast.error('Invalid Email or Password'))
+  }
 
   return (
     <div className="container">
@@ -43,14 +61,10 @@ const SignIn = () => {
             required
           />
         </div>
-        <Link to='/home'>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" onClick={logIn} className="btn btn-primary">
           Sign In
         </button>
-        </Link>
         <br />
-
-        
       </form>
       <label htmlFor="a" className="form-label">
             Don't have account ?

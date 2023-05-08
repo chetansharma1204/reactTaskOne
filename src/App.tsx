@@ -1,6 +1,8 @@
 // import './App.css';
 import { ReactElement } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
  
 // import Route from './routes/route';
 import Dashboard from './components/pages/Dashboard';
@@ -16,6 +18,7 @@ import InvalidPage from './components/pages/PageNotFound';
 function App(): ReactElement {
   return (
     <div className="App">
+      <ToastContainer limit={1} />
       <Routes>
         <Route path='/' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
