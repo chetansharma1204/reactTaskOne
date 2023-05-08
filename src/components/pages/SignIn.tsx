@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {  toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 
-const SignIn = () => {
+const SignIn = ():ReactElement => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>):void => {
     event.preventDefault();
   };
 
-  const logIn = () => {
+  const logIn = ():void => {
     axios.post(
       "http://localhost:9000/api/auth/log-in",
       {
@@ -24,7 +24,7 @@ const SignIn = () => {
     ).then(response => {
       if (response.data.code === 200) {
         toast.success(response.data.message);
-        setTimeout(()=>navigate('/home'),2000)
+        setTimeout(():void =>navigate('/home'),2000)
       } 
     }).catch(error => toast.error('Invalid Email or Password'))
   }

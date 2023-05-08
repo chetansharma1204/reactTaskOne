@@ -1,6 +1,7 @@
+import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ():ReactElement => {
   return (
     <div>
       <div className="container-fluid">

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import avatar from "../../avatar.jpeg";
 import { Link } from "react-router-dom";
 
-const AboutUs = () => {
+const AboutUs = ():ReactElement => {
   const name = "Chetan Sharma";
 
   const technologies = [

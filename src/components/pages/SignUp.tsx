@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {  toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 
-const SignUp = () => {
+const SignUp = ():ReactElement => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const SignUp = () => {
     event.preventDefault();
   };
 
-  const register =  () => {
+  const register =  ():void => {
     axios.post(
       "http://localhost:9000/api/auth/register",
       {
@@ -47,7 +47,7 @@ const SignUp = () => {
             id="firstName"
             placeholder="Enter your first name"
             value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
+            onChange={(event):void => setFirstName(event.target.value)}
             required
           />
         </div>
@@ -61,7 +61,7 @@ const SignUp = () => {
             id="lastName"
             placeholder="Enter your last name"
             value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
+            onChange={(event):void => setLastName(event.target.value)}
             required
           />
         </div>
@@ -75,7 +75,7 @@ const SignUp = () => {
             id="email"
             placeholder="Enter your email"
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(event):void => setEmail(event.target.value)}
             required
           />
         </div>
@@ -89,7 +89,7 @@ const SignUp = () => {
             id="password"
             placeholder="Enter your password"
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(event):void => setPassword(event.target.value)}
             required
           />
         </div>
