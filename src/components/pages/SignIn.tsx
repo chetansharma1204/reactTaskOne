@@ -24,6 +24,7 @@ const SignIn = ():ReactElement => {
     ).then(response => {
       if (response.data.code === 200) {
         toast.success(response.data.message);
+        localStorage.setItem('token', response?.data?.data?._id)
         setTimeout(():void =>navigate('/home'),2000)
       } 
     }).catch(error => toast.error('Invalid Email or Password'))

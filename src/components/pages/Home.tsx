@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import NavBar from "./NavBar"
+import NavBar from "../common/NavBar"
 
 const Home = (): ReactElement => {
 return (<>

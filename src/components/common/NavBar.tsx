@@ -56,7 +56,7 @@ const NavBar = ():ReactElement => {
           </div>
           <div className="col-3">
             <ul className="navbar-nav">
-              <li className="nav-item">
+              <li className="nav-item" onClick={()=>localStorage.removeItem('token')}>
                 <Link className="nav-link" aria-current="page" to="/">
                   Log out
                 </Link>
